@@ -1,3 +1,8 @@
+export default {
+    SECRET: 'products-api'
+}
+
+
 const config = {
     PORT: 3000,
     CLIENT_DIR: 'public',
@@ -6,3 +11,4 @@ const config = {
 }
 
 module.exports = config
+
