@@ -1,3 +1,5 @@
+import { param } from 'express/lib/request';
+import { status } from 'express/lib/response';
 import Products from '../models/Product'
 
 export const createProducts = async (req,res) => {
@@ -18,14 +20,25 @@ export const getProducts = async (req,res) => {
 
 }
 
-export const getProductsById = (req,res) => {
+export const getProductsById = async (req,res) => {
+    const product = await Products.findById(req.params.productId);
+    res.status(200).json(product)
+
 
 }
 
-export const updateProductsById = (req,res) => {
+export const updateProductsById = async (req,res) => {
+    const updateProduct = await Products.findByIdAndUpdate(req.params.productId, req.body, {
+        new: true
+    })
+    res.status(200).json(updateProduct)
 
 }
 
-export const deleteProductsById = (req,res) => {
+export const deleteProductsById = async (req,res) => {
+    const {productId} = req.params;
+    await Products.findByIdAndDelete(productId) 
+        
+    res.status(204).json()
 
 }
